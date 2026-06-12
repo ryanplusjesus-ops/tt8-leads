@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)file:///C:/Users/Ryan/Downloads/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TT8 Vision — Lead Pipeline</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--black:#0E0E0E;--white:#fff;--off:#F5F4F0;--mid:#8A8A82;--bdr:#E2E1DC;--green:#1D9E75;--gl:#EAF5F0;--amber:#D98B00;--al:#FDF3DC;--red:#C13A3A;--rl:#FCEAEA;--blue:#2563EB;--bl:#EFF4FF}
+body{font-family:'Inter',sans-serif;background:var(--off);color:var(--black);min-height:100vh}
+header{background:var(--black);padding:13px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;color:#fff;letter-spacing:.08em;text-transform:uppercase}
+.logo span{color:var(--green)}
+.hright{display:flex;align-items:center;gap:12px}
+.htotal{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--mid)}
+.htotal strong{color:#fff}
+.sdot{width:7px;height:7px;border-radius:50%;background:var(--mid);display:inline-block;margin-right:5px}
+.sdot.live{background:var(--green);box-shadow:0 0 0 2px rgba(29,158,117,.25)}
+.sdot.sync{background:var(--amber);animation:pulse 1s infinite}
+.sdot.err{background:var(--red)}
+.slbl{font-size:11px;color:var(--mid)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.search-bar{padding:12px 24px;background:var(--white);border-bottom:1px solid var(--bdr)}
+.si{width:100%;font-family:'Inter',sans-serif;font-size:13px;padding:9px 14px 9px 36px;border:1px solid var(--bdr);border-radius:8px;background:var(--off);color:var(--black);outline:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='%238A8A82' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:12px center}
+.si:focus{border-color:var(--green);background-color:var(--white)}
+.toolbar{padding:10px 24px;display:flex;align-items:center;gap:7px;border-bottom:1px solid var(--bdr);background:var(--white);flex-wrap:wrap}
+.fl{font-size:11px;color:var(--mid);margin-right:2px}
+.fb{font-size:11px;font-weight:500;padding:4px 12px;border-radius:20px;border:1px solid var(--bdr);background:transparent;color:var(--black);cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif}
+.fb:hover{border-color:var(--black)}
+.fb.on{background:var(--black);color:var(--white);border-color:var(--black)}
+.sep{width:1px;height:16px;background:var(--bdr);flex-shrink:0}
+.sp{flex:1}
+.ss{font-size:11px;font-family:'Inter',sans-serif;padding:4px 8px;border:1px solid var(--bdr);border-radius:6px;background:transparent;color:var(--black);cursor:pointer}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bdr);border-bottom:1px solid var(--bdr)}
+.sc{background:var(--white);padding:12px 20px;text-align:center}
+.sn{font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:500;display:block}
+.sl{font-size:10px;color:var(--mid);text-transform:uppercase;letter-spacing:.06em}
+.sa .sn{color:var(--green)}
+.sb .sn{color:var(--amber)}
+.main{padding:20px 24px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.empty{text-align:center;padding:70px 20px;color:var(--mid)}
+.empty h2{font-size:17px;font-weight:400;margin-bottom:7px;color:var(--black)}
+.card{background:var(--white);border:1px solid var(--bdr);border-radius:10px;overflow:hidden;transition:box-shadow .15s}
+.card:hover{box-shadow:0 3px 14px rgba(0,0,0,.07)}
+.ct{padding:14px 16px 12px;border-bottom:1px solid var(--bdr);display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.cc{font-size:14px;font-weight:600;line-height:1.3}
+.cm{font-size:11px;color:var(--mid);margin-top:2px;line-height:1.5}
+.sc2{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;flex-shrink:0}
+.sA{background:var(--gl);color:var(--green);border:1px solid #9ADBC3}
+.sB{background:var(--al);color:var(--amber);border:1px solid #F5C842}
+.sC{background:var(--bl);color:var(--blue);border:1px solid #93C5FD}
+.cb2{padding:12px 16px}
+.lbl{font-size:10px;font-weight:600;color:var(--mid);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px}
+.lv{font-size:12px;color:var(--black);margin-bottom:10px;line-height:1.5}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px}
+.chip{font-size:10px;padding:2px 8px;border-radius:20px;font-weight:500}
+.cr{background:var(--rl);color:var(--red);border:1px solid #F4AEAE}
+.ca{background:var(--al);color:var(--amber);border:1px solid #EF9F27}
+.hk{background:var(--gl);border-left:2px solid var(--green);padding:8px 10px;border-radius:0 6px 6px 0;margin-bottom:10px}
+.hk p{font-size:11px;color:#085041;line-height:1.6;font-style:italic}
+.cf{padding:10px 16px;border-top:1px solid var(--bdr);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+select{font-size:11px;font-family:'Inter',sans-serif;padding:3px 7px;border:1px solid var(--bdr);border-radius:6px;background:transparent;color:var(--black);cursor:pointer;flex:1;min-width:100px}
+.be{font-size:11px;padding:3px 10px;border-radius:6px;border:1px solid var(--bdr);background:transparent;color:var(--black);cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap}
+.be:hover{background:var(--off)}
+.bt{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--mid);margin-left:auto}
+.stnew .card{border-left:3px solid #94a3b8}
+.stcontacted .card{border-left:3px solid var(--blue)}
+.streplied .card{border-left:3px solid var(--amber)}
+.stbooked .card{border-left:3px solid var(--green)}
+.stdnc .card{border-left:3px solid var(--red);opacity:.5}
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:center;justify-content:center;padding:20px}
+.modal-bg.open{display:flex}
+.modal{background:var(--white);border-radius:12px;width:100%;max-width:540px;max-height:88vh;overflow-y:auto}
+.mh{padding:18px 20px 14px;border-bottom:1px solid var(--bdr);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:var(--white)}
+.mt{font-size:15px;font-weight:600}
+.mx{width:26px;height:26px;border-radius:50%;border:1px solid var(--bdr);background:transparent;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--mid)}
+.mb{padding:18px 20px}
+.ms{margin-bottom:16px}
+.ml{font-size:10px;font-weight:600;color:var(--mid);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px}
+.mv{font-size:13px;line-height:1.6}
+.mv a{color:var(--green);text-decoration:none}
+.ep{background:var(--off);border:1px solid var(--bdr);border-radius:8px;padding:12px 14px;font-size:12px;line-height:1.8;white-space:pre-wrap;font-family:'Inter',sans-serif}
+.bcp{font-size:11px;padding:4px 12px;border-radius:6px;border:1px solid var(--bdr);background:transparent;cursor:pointer;font-family:'Inter',sans-serif;margin-top:6px}
+.bcp:hover{background:var(--off)}
+textarea{width:100%;font-family:'Inter',sans-serif;font-size:12px;padding:8px 10px;border:1px solid var(--bdr);border-radius:8px;resize:vertical;min-height:72px;color:var(--black)}
+.bsv{margin-top:7px;font-size:12px;padding:6px 16px;background:var(--black);color:var(--white);border:none;border-radius:8px;cursor:pointer;font-family:'Inter',sans-serif}
+.bsv:hover{background:#222}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--black);color:var(--white);padding:9px 16px;border-radius:8px;font-size:12px;z-index:999;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.show{opacity:1}
+@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.main,.toolbar,.search-bar,header{padding-left:14px;padding-right:14px}}
+</style>
+</head>
+<body>
+<header>
+  <span class="logo">TT8 <span>Vision</span> · Lead Pipeline</span>
+  <div class="hright">
+    <span class="htotal"><strong id="tc">4</strong> prospects</span>
+    <span><span class="sdot err" id="sdot"></span><span class="slbl" id="slbl">Connection failed</span></span>
+  </div>
+</header>
+<div class="search-bar">
+  <input class="si" type="text" id="sq" placeholder="Search company, contact, location, industry, pain point…">
+</div>
+<div class="toolbar">
+  <span class="fl">Score</span>
+  <button class="fb on" data-f="all">All</button>
+  <button class="fb" data-f="A">A-Tier</button>
+  <button class="fb" data-f="B">B-Tier</button>
+  <button class="fb" data-f="C">C-Tier</button>
+  <div class="sep"></div>
+  <span class="fl">Status</span>
+  <button class="fb" data-fs="New">New</button>
+  <button class="fb" data-fs="Contacted">Contacted</button>
+  <button class="fb" data-fs="Replied">Replied</button>
+  <button class="fb" data-fs="Booked">Booked</button>
+  <div class="sp"></div>
+  <select class="ss" id="srt">
+    <option value="score">Sort: Score</option>
+    <option value="newest">Sort: Newest</option>
+    <option value="oldest">Sort: Oldest</option>
+    <option value="status">Sort: Status</option>
+  </select>
+</div>
+<div class="stats">
+  <div class="sc sa"><span class="sn" id="ca">3</span><span class="sl">A-Tier</span></div>
+  <div class="sc sb"><span class="sn" id="cb">1</span><span class="sl">B-Tier</span></div>
+  <div class="sc"><span class="sn" id="ck">0</span><span class="sl">Booked</span></div>
+  <div class="sc"><span class="sn" id="cc">0</span><span class="sl">Contacted</span></div>
+</div>
+<div class="main">
+  <div class="grid" id="grid"><div class="stnew"><div class="card">
+      <div class="ct"><div><div class="cc">4 Star Plumbing, Heating &amp; Air</div><div class="cm">HVAC / Plumbing · Bryan, Ohio, US</div><div class="cm">Rob Weaver — Owner-operator</div></div><span class="sc2 sA">A</span></div>
+      <div class="cb2"><div class="lbl">Pain points</div><div class="chips"><span class="chip cr">Broken booking button</span><span class="chip cr">No after-hours capture</span><span class="chip ca">Gmail on contact page</span><span class="chip ca">No instant quote</span></div><div class="lbl">Hook</div><div class="hk"><p>Your site's 'Book a Service' button links to a mailto — anyone enquiring after 5pm goes unanswered until morning. A competitor who responds instantly wins the job.</p></div><div class="lbl">Recommended service</div><div class="lv">AI Receptionist / Quote Automation</div></div>
+      <div class="cf">
+        <select onchange="upSt(&#39;b1-4star&#39;,this.value)"><option selected="">New</option><option>Contacted</option><option>Replied</option><option>Booked</option><option>Do-Not-Contact</option></select>
+        <button class="be" onclick="openM(&#39;b1-4star&#39;)">Full brief ↗</button>
+        <span class="bt">Batch 1</span>
+      </div>
+    </div></div><div class="stnew"><div class="card">
+      <div class="ct"><div><div class="cc">Safehouse Services</div><div class="cm">Property Maintenance · London, UK</div><div class="cm">Nigel Lewis — Owner</div></div><span class="sc2 sA">A</span></div>
+      <div class="cb2"><div class="lbl">Pain points</div><div class="chips"><span class="chip cr">No online booking</span><span class="chip cr">1hr promise / manual intake</span><span class="chip ca">Phone + form only</span><span class="chip ca">CS bottleneck</span></div><div class="lbl">Hook</div><div class="hk"><p>You promise to respond to emergencies within one hour — but a landlord at 11pm has to fill a form and wait. The intake doesn't match the promise.</p></div><div class="lbl">Recommended service</div><div class="lv">AI Receptionist / Quote Automation</div></div>
+      <div class="cf">
+        <select onchange="upSt(&#39;b1-safehouse&#39;,this.value)"><option selected="">New</option><option>Contacted</option><option>Replied</option><option>Booked</option><option>Do-Not-Contact</option></select>
+        <button class="be" onclick="openM(&#39;b1-safehouse&#39;)">Full brief ↗</button>
+        <span class="bt">Batch 1</span>
+      </div>
+    </div></div><div class="stnew"><div class="card">
+      <div class="ct"><div><div class="cc">Johnston Property Maintenance Ltd</div><div class="cm">Property Maintenance · Stirling, Scotland, UK</div><div class="cm">Neil Carson — Owner / Director</div></div><span class="sc2 sA">A</span></div>
+      <div class="cb2"><div class="lbl">Pain points</div><div class="chips"><span class="chip cr">Quote by phone only</span><span class="chip cr">No online booking</span><span class="chip ca">Hotel chain contract</span><span class="chip ca">Scotland winner 2024</span></div><div class="lbl">Hook</div><div class="hk"><p>You're the registered contractor for a large hotel chain — high-volume reactive work, but the only intake is 'call for a quote.' One missed call from a maintenance manager is a job lost.</p></div><div class="lbl">Recommended service</div><div class="lv">AI Receptionist / Quote Automation</div></div>
+      <div class="cf">
+        <select onchange="upSt(&#39;b1-johnston&#39;,this.value)"><option selected="">New</option><option>Contacted</option><option>Replied</option><option>Booked</option><option>Do-Not-Contact</option></select>
+        <button class="be" onclick="openM(&#39;b1-johnston&#39;)">Full brief ↗</button>
+        <span class="bt">Batch 1</span>
+      </div>
+    </div></div><div class="stnew"><div class="card">
+      <div class="ct"><div><div class="cc">Rescue Heat &amp; Air</div><div class="cm">HVAC · Claremore / Tulsa, Oklahoma, US</div><div class="cm">Tom Hunt — Founder</div></div><span class="sc2 sB">B</span></div>
+      <div class="cb2"><div class="lbl">Pain points</div><div class="chips"><span class="chip cr">No instant quote tool</span><span class="chip ca">Free estimate needs a call</span><span class="chip ca">Expanding fast</span><span class="chip ca">Booking limited</span></div><div class="lbl">Hook</div><div class="hk"><p>You're expanding across Northeast Oklahoma promising same-day service — but a free estimate still means calling in. A homeowner comparing 3 HVAC companies at 9pm books whoever responds instantly.</p></div><div class="lbl">Recommended service</div><div class="lv">Quote Automation</div></div>
+      <div class="cf">
+        <select onchange="upSt(&#39;b1-rescue&#39;,this.value)"><option selected="">New</option><option>Contacted</option><option>Replied</option><option>Booked</option><option>Do-Not-Contact</option></select>
+        <button class="be" onclick="openM(&#39;b1-rescue&#39;)">Full brief ↗</button>
+        <span class="bt">Batch 1</span>
+      </div>
+    </div></div></div>
+  <div class="empty" id="emp" style="display:none">
+    <h2 id="et">No leads yet</h2>
+    <p id="es">Ask Claude to research prospects — they'll appear here automatically.</p>
+  </div>
+</div>
+<div class="modal-bg" id="mbg">
+  <div class="modal">
+    <div class="mh"><span class="mt" id="mtitle"></span><button class="mx" id="mcl">✕</button></div>
+    <div class="mb" id="mbody"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const SB='https://tcvhixfxnrklflyydyda.supabase.co';
+const SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRjdmhpeGZ4bnJrbGZseWR5eWRhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExOTg3NzYsImV4cCI6MjA5Njc3NDc3Nn0.KlPD6P_UuC9fCHMUEhyVGouc_w-wxDY_g7ogH4PlrCY';
+const H={'apikey':SK,'Authorization':'Bearer '+SK,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates,return=representation'};
+
+async function dbGet(){const r=await fetch(SB+'/rest/v1/leads?select=*&order=data->>addedAt.asc',{headers:H});if(!r.ok)throw new Error(await r.text());return r.json();}
+async function dbUpsert(rows){const r=await fetch(SB+'/rest/v1/leads',{method:'POST',headers:H,body:JSON.stringify(rows)});if(!r.ok)throw new Error(await r.text());return r.json();}
+async function dbPatch(id,data){const r=await fetch(SB+'/rest/v1/leads?id=eq.'+id,{method:'PATCH',headers:{...H,'Prefer':'return=representation'},body:JSON.stringify({data})});if(!r.ok)throw new Error(await r.text());}
+
+const BATCH1=[
+  {id:'b1-4star',batch:1,company:'4 Star Plumbing, Heating & Air',industry:'HVAC / Plumbing',location:'Bryan, Ohio, US',contact:'Rob Weaver',role:'Owner-operator',email:'rob4starr@gmail.com',website:'https://4starplumbingheatingair.com',score:'A',status:'New',addedAt:1749600000000,painChips:[{l:'Broken booking button',t:'r'},{l:'No after-hours capture',t:'r'},{l:'Gmail on contact page',t:'a'},{l:'No instant quote',t:'a'}],hook:"Your site's 'Book a Service' button links to a mailto — anyone enquiring after 5pm goes unanswered until morning. A competitor who responds instantly wins the job.",service:'AI Receptionist / Quote Automation',outcome:'Capture every after-hours enquiry automatically. Rob wakes up to confirmed leads, not missed calls.',outreach:'Lead with the broken booking button — one concrete observation, zero jargon.',emailDraft:"Hi Rob,\n\nYour site's \"Book a Service\" button links to a mailto — anyone enquiring outside business hours goes unanswered until morning.\n\nFor a business with 40 years of reputation, that's a quiet leak. A competitor who responds instantly wins the job before you even see the message.\n\nWe help trade businesses capture and respond to every enquiry automatically — no missed calls, no cold leads.\n\nWorth a 20-minute call to show you what that looks like for 4 Star?\n\n— [Your name], TT8 Vision"},
+  {id:'b1-safehouse',batch:1,company:'Safehouse Services',industry:'Property Maintenance',location:'London, UK',contact:'Nigel Lewis',role:'Owner',email:'info@safehouseservices.co.uk',linkedin:'https://linkedin.com/in/nigel-lewis-0442bb29',website:'https://safehouseservices.co.uk',score:'A',status:'New',addedAt:1749600001000,painChips:[{l:'No online booking',t:'r'},{l:'1hr promise / manual intake',t:'r'},{l:'Phone + form only',t:'a'},{l:'CS bottleneck',t:'a'}],hook:"You promise to respond to emergencies within one hour — but a landlord at 11pm has to fill a form and wait. The intake doesn't match the promise.",service:'AI Receptionist / Quote Automation',outcome:'Make the 1-hour promise real. Every out-of-hours enquiry gets an instant response — without hiring another CS exec.',outreach:'The 1-hour emergency promise vs. a contact form that closes at 5pm. That tension is the hook.',emailDraft:"Hi Nigel,\n\nYou promise to respond to emergencies within an hour — but a landlord contacting you at 11pm hits a contact form and waits.\n\nThe intake process doesn't match the promise. And in property maintenance, whoever replies first usually gets the job.\n\nWe build AI systems that respond to enquiries instantly, 24/7 — so the promise you make on the website is the experience they actually get.\n\nQuick 20-minute call to show you how it works?\n\n— [Your name], TT8 Vision"},
+  {id:'b1-johnston',batch:1,company:'Johnston Property Maintenance Ltd',industry:'Property Maintenance',location:'Stirling, Scotland, UK',contact:'Neil Carson',role:'Owner / Director',website:'https://johnstonpropertymaintenanceltd.co.uk',score:'A',status:'New',addedAt:1749600002000,painChips:[{l:'Quote by phone only',t:'r'},{l:'No online booking',t:'r'},{l:'Hotel chain contract',t:'a'},{l:'Scotland winner 2024',t:'a'}],hook:"You're the registered contractor for a large hotel chain — high-volume reactive work, but the only intake is 'call for a quote.' One missed call from a maintenance manager is a job lost.",service:'AI Receptionist / Quote Automation',outcome:'Handle the volume that comes with growth. Every hotel client enquiry captured and acknowledged instantly.',outreach:"Growth creates the pain. Winning awards and landing big contracts — but the enquiry process hasn't scaled.",emailDraft:"Hi Neil,\n\nCongratulations on the Scotland business award — that kind of growth usually comes with a new problem: more enquiries than your current process can comfortably handle.\n\nIf a maintenance manager from your hotel contract calls on a Sunday and can't get through, that job goes elsewhere.\n\nWe help businesses like yours capture and respond to every enquiry automatically — so the volume from growth doesn't become a bottleneck.\n\n20 minutes to show you what that looks like?\n\n— [Your name], TT8 Vision"},
+  {id:'b1-rescue',batch:1,company:'Rescue Heat & Air',industry:'HVAC',location:'Claremore / Tulsa, Oklahoma, US',contact:'Tom Hunt',role:'Founder',website:'https://rescueheatandair.com',score:'B',status:'New',addedAt:1749600003000,painChips:[{l:'No instant quote tool',t:'r'},{l:'Free estimate needs a call',t:'a'},{l:'Expanding fast',t:'a'},{l:'Booking limited',t:'a'}],hook:"You're expanding across Northeast Oklahoma promising same-day service — but a free estimate still means calling in. A homeowner comparing 3 HVAC companies at 9pm books whoever responds instantly.",service:'Quote Automation',outcome:'Win the after-hours comparison. Homeowners get an instant quote from Rescue and book before morning.',outreach:'Tom founded the business to treat customers better. Responding instantly is how you live that promise at scale.',emailDraft:"Hi Tom,\n\nYou built Rescue Heat & Air around treating customers the right way. But right now, a homeowner comparing HVAC companies at 9pm still has to call to get a quote from you — and whoever responds first usually wins the job.\n\nWe help service businesses send an instant, accurate quote the moment someone enquires — day or night.\n\nWorth a quick call to show you how it works?\n\n— [Your name], TT8 Vision"}
+];
+
+let leads=[];
+let fScore='all',fStatus=null,sq='',sortBy='score';
+
+function sync(state,lbl){
+  const d=document.getElementById('sdot'),l=document.getElementById('slbl');
+  d.className='sdot '+(state==='live'?'live':state==='sync'?'sync':'err');
+  l.textContent=lbl;
+}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+
+function so(s){return{A:0,B:1,C:2}[s]??3;}
+function sto(s){return['New','Contacted','Replied','Booked','Do-Not-Contact'].indexOf(s);}
+
+function getList(){
+  let l=[...leads];
+  if(fScore!=='all')l=l.filter(x=>x.score===fScore);
+  if(fStatus)l=l.filter(x=>(x.status||'New')===fStatus);
+  if(sq){const q=sq.toLowerCase();l=l.filter(x=>[x.company,x.contact,x.location,x.industry,...(x.painChips||[]).map(c=>c.l)].join(' ').toLowerCase().includes(q));}
+  l.sort((a,b)=>sortBy==='score'?so(a.score)-so(b.score):sortBy==='newest'?(b.addedAt||0)-(a.addedAt||0):sortBy==='oldest'?(a.addedAt||0)-(b.addedAt||0):sto(a.status||'New')-sto(b.status||'New'));
+  return l;
+}
+
+function renderStats(){
+  const l=leads;
+  document.getElementById('tc').textContent=l.length;
+  document.getElementById('ca').textContent=l.filter(x=>x.score==='A').length;
+  document.getElementById('cb').textContent=l.filter(x=>x.score==='B').length;
+  document.getElementById('ck').textContent=l.filter(x=>x.status==='Booked').length;
+  document.getElementById('cc').textContent=l.filter(x=>x.status==='Contacted').length;
+}
+
+function chipH(c){return`<span class="chip ${c.t==='r'?'cr':'ca'}">${c.l}</span>`;}
+
+function renderCards(){
+  const list=getList();
+  const g=document.getElementById('grid'),e=document.getElementById('emp');
+  if(!list.length){g.innerHTML='';e.style.display='block';
+    document.getElementById('et').textContent=sq?`No results for "${sq}"`:fStatus||fScore!=='all'?'No leads match this filter':'No leads yet';
+    document.getElementById('es').textContent=sq?'Try a different search term.':'Ask Claude to research prospects.';
+    return;}
+  e.style.display='none';
+  g.innerHTML=list.map(l=>{
+    const st=l.status||'New';
+    const sc='st'+st.toLowerCase().replace(/[^a-z]/g,'');
+    const chips=(l.painChips||[]).map(chipH).join('');
+    return`<div class="${sc}"><div class="card">
+      <div class="ct"><div><div class="cc">${l.company}</div><div class="cm">${l.industry} · ${l.location}</div><div class="cm">${l.contact}${l.role?' — '+l.role:''}</div></div><span class="sc2 s${l.score}">${l.score}</span></div>
+      <div class="cb2"><div class="lbl">Pain points</div><div class="chips">${chips}</div><div class="lbl">Hook</div><div class="hk"><p>${l.hook}</p></div><div class="lbl">Recommended service</div><div class="lv">${l.service}</div></div>
+      <div class="cf">
+        <select onchange="upSt('${l.id}',this.value)">${['New','Contacted','Replied','Booked','Do-Not-Contact'].map(s=>`<option${s===st?' selected':''}>${s}</option>`).join('')}</select>
+        <button class="be" onclick="openM('${l.id}')">Full brief ↗</button>
+        <span class="bt">${l.batch?'Batch '+l.batch:''}</span>
+      </div>
+    </div></div>`;
+  }).join('');
+}
+
+function render(){renderStats();renderCards();}
+
+async function upSt(id,status){
+  const l=leads.find(x=>x.id===id);if(!l)return;
+  l.status=status;
+  sync('sync','Saving…');
+  try{await dbPatch(id,l);sync('live','Live');toast('Status updated.');}
+  catch{sync('err','Save failed');toast('Save failed — check connection.');}
+  render();
+}
+
+function openM(id){
+  const l=leads.find(x=>x.id===id);if(!l)return;
+  document.getElementById('mtitle').textContent=l.company;
+  const chips=(l.painChips||[]).map(chipH).join('');
+  document.getElementById('mbody').innerHTML=`
+    <div class="ms"><div class="ml">Contact</div><div class="mv">${l.contact}${l.role?' · '+l.role:''}<br>${l.email?`<a href="mailto:${l.email}">${l.email}</a><br>`:''} ${l.linkedin?`<a href="${l.linkedin}" target="_blank">LinkedIn ↗</a><br>`:''} ${l.website?`<a href="${l.website}" target="_blank">${l.website} ↗</a>`:''}</div></div>
+    <div class="ms"><div class="ml">Pain points</div><div class="chips">${chips}</div></div>
+    <div class="ms"><div class="ml">Personalisation hook</div><div class="hk"><p>${l.hook}</p></div></div>
+    <div class="ms"><div class="ml">Outreach angle</div><div class="mv">${l.outreach||'—'}</div></div>
+    <div class="ms"><div class="ml">Recommended service</div><div class="mv">${l.service}</div></div>
+    <div class="ms"><div class="ml">Expected outcome</div><div class="mv">${l.outcome||'—'}</div></div>
+    ${l.emailDraft?`<div class="ms"><div class="ml">Cold email draft</div><div class="ep" id="ep-${l.id}">${l.emailDraft}</div><button class="bcp" onclick="copyE('${l.id}')">Copy email</button></div>`:''}
+    <div class="ms"><div class="ml">Notes</div><textarea id="nt-${l.id}" placeholder="Add notes about this prospect…">${l.notes||''}</textarea><button class="bsv" onclick="saveN('${l.id}')">Save notes</button></div>`;
+  document.getElementById('mbg').classList.add('open');
+}
+
+function copyE(id){const el=document.getElementById('ep-'+id);navigator.clipboard.writeText(el.textContent).then(()=>toast('Email copied.'));}
+async function saveN(id){
+  const l=leads.find(x=>x.id===id);if(!l)return;
+  l.notes=document.getElementById('nt-'+id).value;
+  sync('sync','Saving…');
+  try{await dbPatch(id,l);sync('live','Live');toast('Notes saved.');}
+  catch{sync('err','Save failed');}
+}
+
+document.getElementById('sq').addEventListener('input',e=>{sq=e.target.value.trim();render();});
+document.querySelectorAll('[data-f]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-f]').forEach(x=>x.classList.remove('on'));b.classList.add('on');fScore=b.dataset.f;render();}));
+document.querySelectorAll('[data-fs]').forEach(b=>b.addEventListener('click',()=>{const v=b.dataset.fs;if(fStatus===v){fStatus=null;b.classList.remove('on');}else{document.querySelectorAll('[data-fs]').forEach(x=>x.classList.remove('on'));fStatus=v;b.classList.add('on');}render();}));
+document.getElementById('srt').addEventListener('change',e=>{sortBy=e.target.value;render();});
+document.getElementById('mcl').addEventListener('click',()=>document.getElementById('mbg').classList.remove('open'));
+document.getElementById('mbg').addEventListener('click',e=>{if(e.target===document.getElementById('mbg'))document.getElementById('mbg').classList.remove('open');});
+
+(async()=>{
+  sync('sync','Connecting…');
+  try{
+    const rows=await dbGet();
+    leads=rows.map(r=>r.data);
+    if(leads.length===0){
+      sync('sync','Loading leads…');
+      await dbUpsert(BATCH1.map(l=>({id:l.id,data:l})));
+      leads=BATCH1;
+    }
+    render();
+    sync('live','Live');
+    setInterval(async()=>{try{const r=await dbGet();leads=r.map(x=>x.data);render();}catch{}},30000);
+  }catch(err){
+    sync('err','Connection failed');
+    console.error(err);
+    leads=BATCH1;
+    render();
+  }
+})();
+</script>
+
+
+</body></html>
