@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<!-- saved from url=(0044)file:///C:/Users/Ryan/Downloads/index_2.html -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<html lang="en">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TT8 Vision — Lead Pipeline</title>
 <style>
@@ -89,6 +89,15 @@ textarea{width:100%;font-family:'Inter',sans-serif;font-size:12px;padding:8px 10
 .bsv:hover{background:#222}
 .toast{position:fixed;bottom:20px;right:20px;background:var(--black);color:var(--white);padding:9px 16px;border-radius:8px;font-size:12px;z-index:999;opacity:0;transition:opacity .2s;pointer-events:none}
 .toast.show{opacity:1}
+.flag-btn{background:transparent;border:none;cursor:pointer;font-size:16px;padding:0 2px;line-height:1;opacity:.35;transition:opacity .15s;flex-shrink:0}
+.flag-btn:hover{opacity:.7}
+.flag-btn.flagged{opacity:1}
+.followup-row{display:flex;align-items:center;gap:6px;margin-top:6px}
+.followup-label{font-size:10px;font-weight:600;color:var(--mid);text-transform:uppercase;letter-spacing:.07em;white-space:nowrap}
+.followup-input{font-size:11px;font-family:'Inter',sans-serif;padding:3px 7px;border:1px solid var(--bdr);border-radius:6px;background:transparent;color:var(--black);cursor:pointer;flex:1}
+.followup-input.overdue{border-color:var(--amber);background:var(--al);color:var(--amber);font-weight:500}
+.overdue-badge{font-size:10px;background:var(--al);color:var(--amber);border:1px solid #EF9F27;border-radius:20px;padding:2px 7px;font-weight:500;white-space:nowrap}
+.card.is-flagged{box-shadow:0 0 0 2px #F59E0B inset}
 @media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.main,.toolbar,.search-bar,header{padding-left:14px;padding-right:14px}}
 </style>
 </head>
@@ -96,8 +105,8 @@ textarea{width:100%;font-family:'Inter',sans-serif;font-size:12px;padding:8px 10
 <header>
   <span class="logo">TT8 <span>Vision</span> · Lead Pipeline</span>
   <div class="hright">
-    <span class="htotal"><strong id="tc">4</strong> prospects</span>
-    <span><span class="sdot live" id="sdot"></span><span class="slbl" id="slbl">Live</span></span>
+    <span class="htotal"><strong id="tc">0</strong> prospects</span>
+    <span><span class="sdot" id="sdot"></span><span class="slbl" id="slbl">Connecting…</span></span>
   </div>
 </header>
 <div class="search-bar">
@@ -115,54 +124,26 @@ textarea{width:100%;font-family:'Inter',sans-serif;font-size:12px;padding:8px 10
   <button class="fb" data-fs="Contacted">Contacted</button>
   <button class="fb" data-fs="Replied">Replied</button>
   <button class="fb" data-fs="Booked">Booked</button>
+  <div class="sep"></div>
+  <button class="fb" data-ff="hot" id="fb-hot">🔥 Hot</button>
+  <button class="fb" data-ff="overdue" id="fb-overdue">⚠️ Overdue</button>
   <div class="sp"></div>
   <select class="ss" id="srt">
     <option value="score">Sort: Score</option>
     <option value="newest">Sort: Newest</option>
     <option value="oldest">Sort: Oldest</option>
     <option value="status">Sort: Status</option>
+    <option value="followup">Sort: Follow-up date</option>
   </select>
 </div>
 <div class="stats">
-  <div class="sc sa"><span class="sn" id="ca">3</span><span class="sl">A-Tier</span></div>
-  <div class="sc sb"><span class="sn" id="cb">1</span><span class="sl">B-Tier</span></div>
+  <div class="sc sa"><span class="sn" id="ca">0</span><span class="sl">A-Tier</span></div>
+  <div class="sc sb"><span class="sn" id="cb">0</span><span class="sl">B-Tier</span></div>
   <div class="sc"><span class="sn" id="ck">0</span><span class="sl">Booked</span></div>
-  <div class="sc"><span class="sn" id="cc">0</span><span class="sl">Contacted</span></div>
+  <div class="sc"><span class="sn" id="cod" style="color:var(--amber)">0</span><span class="sl">Overdue</span></div>
 </div>
 <div class="main">
-  <div class="grid" id="grid"><div class="stnew"><div class="card">
-      <div class="ct"><div><div class="cc">4 Star Plumbing, Heating &amp; Air</div><div class="cm">HVAC / Plumbing · Bryan, Ohio, US</div><div class="cm">Rob Weaver — Owner-operator</div></div><span class="sc2 sA">A</span></div>
-      <div class="cb2"><div class="lbl">Pain points</div><div class="chips"><span class="chip cr">Broken booking button</span><span class="chip cr">No after-hours capture</span><span class="chip ca">Gmail on contact page</span><span class="chip ca">No instant quote</span></div><div class="lbl">Hook</div><div class="hk"><p>Your site's 'Book a Service' button links to a mailto — anyone enquiring after 5pm goes unanswered until morning. A competitor who responds instantly wins the job.</p></div><div class="lbl">Recommended service</div><div class="lv">AI Receptionist / Quote Automation</div></div>
-      <div class="cf">
-        <select onchange="upSt(&#39;b1-4star&#39;,this.value)"><option selected="">New</option><option>Contacted</option><option>Replied</option><option>Booked</option><option>Do-Not-Contact</option></select>
-        <button class="be" onclick="openM(&#39;b1-4star&#39;)">Full brief ↗</button>
-        <span class="bt">Batch 1</span>
-      </div>
-    </div></div><div class="stnew"><div class="card">
-      <div class="ct"><div><div class="cc">Safehouse Services</div><div class="cm">Property Maintenance · London, UK</div><div class="cm">Nigel Lewis — Owner</div></div><span class="sc2 sA">A</span></div>
-      <div class="cb2"><div class="lbl">Pain points</div><div class="chips"><span class="chip cr">No online booking</span><span class="chip cr">1hr promise / manual intake</span><span class="chip ca">Phone + form only</span><span class="chip ca">CS bottleneck</span></div><div class="lbl">Hook</div><div class="hk"><p>You promise to respond to emergencies within one hour — but a landlord at 11pm has to fill a form and wait. The intake doesn't match the promise.</p></div><div class="lbl">Recommended service</div><div class="lv">AI Receptionist / Quote Automation</div></div>
-      <div class="cf">
-        <select onchange="upSt(&#39;b1-safehouse&#39;,this.value)"><option selected="">New</option><option>Contacted</option><option>Replied</option><option>Booked</option><option>Do-Not-Contact</option></select>
-        <button class="be" onclick="openM(&#39;b1-safehouse&#39;)">Full brief ↗</button>
-        <span class="bt">Batch 1</span>
-      </div>
-    </div></div><div class="stnew"><div class="card">
-      <div class="ct"><div><div class="cc">Johnston Property Maintenance Ltd</div><div class="cm">Property Maintenance · Stirling, Scotland, UK</div><div class="cm">Neil Carson — Owner / Director</div></div><span class="sc2 sA">A</span></div>
-      <div class="cb2"><div class="lbl">Pain points</div><div class="chips"><span class="chip cr">Quote by phone only</span><span class="chip cr">No online booking</span><span class="chip ca">Hotel chain contract</span><span class="chip ca">Scotland winner 2024</span></div><div class="lbl">Hook</div><div class="hk"><p>You're the registered contractor for a large hotel chain — high-volume reactive work, but the only intake is 'call for a quote.' One missed call from a maintenance manager is a job lost.</p></div><div class="lbl">Recommended service</div><div class="lv">AI Receptionist / Quote Automation</div></div>
-      <div class="cf">
-        <select onchange="upSt(&#39;b1-johnston&#39;,this.value)"><option selected="">New</option><option>Contacted</option><option>Replied</option><option>Booked</option><option>Do-Not-Contact</option></select>
-        <button class="be" onclick="openM(&#39;b1-johnston&#39;)">Full brief ↗</button>
-        <span class="bt">Batch 1</span>
-      </div>
-    </div></div><div class="stnew"><div class="card">
-      <div class="ct"><div><div class="cc">Rescue Heat &amp; Air</div><div class="cm">HVAC · Claremore / Tulsa, Oklahoma, US</div><div class="cm">Tom Hunt — Founder</div></div><span class="sc2 sB">B</span></div>
-      <div class="cb2"><div class="lbl">Pain points</div><div class="chips"><span class="chip cr">No instant quote tool</span><span class="chip ca">Free estimate needs a call</span><span class="chip ca">Expanding fast</span><span class="chip ca">Booking limited</span></div><div class="lbl">Hook</div><div class="hk"><p>You're expanding across Northeast Oklahoma promising same-day service — but a free estimate still means calling in. A homeowner comparing 3 HVAC companies at 9pm books whoever responds instantly.</p></div><div class="lbl">Recommended service</div><div class="lv">Quote Automation</div></div>
-      <div class="cf">
-        <select onchange="upSt(&#39;b1-rescue&#39;,this.value)"><option selected="">New</option><option>Contacted</option><option>Replied</option><option>Booked</option><option>Do-Not-Contact</option></select>
-        <button class="be" onclick="openM(&#39;b1-rescue&#39;)">Full brief ↗</button>
-        <span class="bt">Batch 1</span>
-      </div>
-    </div></div></div>
+  <div class="grid" id="grid"></div>
   <div class="empty" id="emp" style="display:none">
     <h2 id="et">No leads yet</h2>
     <p id="es">Ask Claude to research prospects — they'll appear here automatically.</p>
@@ -192,7 +173,7 @@ const BATCH1=[
 ];
 
 let leads=[];
-let fScore='all',fStatus=null,sq='',sortBy='score';
+let fScore='all',fStatus=null,fFlag=null,sq='',sortBy='score';
 
 function sync(state,lbl){
   const d=document.getElementById('sdot'),l=document.getElementById('slbl');
@@ -201,6 +182,7 @@ function sync(state,lbl){
 }
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
 
+function isOverdue(l){if(!l.followupDate)return false;return new Date(l.followupDate)<new Date(new Date().toDateString());}
 function so(s){return{A:0,B:1,C:2}[s]??3;}
 function sto(s){return['New','Contacted','Replied','Booked','Do-Not-Contact'].indexOf(s);}
 
@@ -208,8 +190,19 @@ function getList(){
   let l=[...leads];
   if(fScore!=='all')l=l.filter(x=>x.score===fScore);
   if(fStatus)l=l.filter(x=>(x.status||'New')===fStatus);
+  if(fFlag==='hot')l=l.filter(x=>x.flagged);
+  if(fFlag==='overdue')l=l.filter(x=>isOverdue(x));
   if(sq){const q=sq.toLowerCase();l=l.filter(x=>[x.company,x.contact,x.location,x.industry,...(x.painChips||[]).map(c=>c.l)].join(' ').toLowerCase().includes(q));}
-  l.sort((a,b)=>sortBy==='score'?so(a.score)-so(b.score):sortBy==='newest'?(b.addedAt||0)-(a.addedAt||0):sortBy==='oldest'?(a.addedAt||0)-(b.addedAt||0):sto(a.status||'New')-sto(b.status||'New'));
+  l.sort((a,b)=>{
+    if(sortBy==='score')return so(a.score)-so(b.score);
+    if(sortBy==='newest')return(b.addedAt||0)-(a.addedAt||0);
+    if(sortBy==='oldest')return(a.addedAt||0)-(b.addedAt||0);
+    if(sortBy==='status')return sto(a.status||'New')-sto(b.status||'New');
+    if(sortBy==='followup'){const da=a.followupDate||'9999',db=b.followupDate||'9999';return da<db?-1:da>db?1:0;}
+    return 0;
+  });
+  // Always float flagged to top
+  l.sort((a,b)=>(b.flagged?1:0)-(a.flagged?1:0));
   return l;
 }
 
@@ -219,7 +212,7 @@ function renderStats(){
   document.getElementById('ca').textContent=l.filter(x=>x.score==='A').length;
   document.getElementById('cb').textContent=l.filter(x=>x.score==='B').length;
   document.getElementById('ck').textContent=l.filter(x=>x.status==='Booked').length;
-  document.getElementById('cc').textContent=l.filter(x=>x.status==='Contacted').length;
+  document.getElementById('cod').textContent=l.filter(x=>isOverdue(x)).length;
 }
 
 function chipH(c){return`<span class="chip ${c.t==='r'?'cr':'ca'}">${c.l}</span>`;}
@@ -236,13 +229,25 @@ function renderCards(){
     const st=l.status||'New';
     const sc='st'+st.toLowerCase().replace(/[^a-z]/g,'');
     const chips=(l.painChips||[]).map(chipH).join('');
-    return`<div class="${sc}"><div class="card">
-      <div class="ct"><div><div class="cc">${l.company}</div><div class="cm">${l.industry} · ${l.location}</div><div class="cm">${l.contact}${l.role?' — '+l.role:''}</div></div><span class="sc2 s${l.score}">${l.score}</span></div>
+    const overdue=isOverdue(l);
+    const fuClass=overdue?'followup-input overdue':'followup-input';
+    const fuVal=l.followupDate||'';
+    return`<div class="${sc}"><div class="card${l.flagged?' is-flagged':''}">
+      <div class="ct"><div><div class="cc">${l.company}</div><div class="cm">${l.industry} · ${l.location}</div><div class="cm">${l.contact}${l.role?' — '+l.role:''}</div></div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0">
+        <span class="sc2 s${l.score}">${l.score}</span>
+        <button class="flag-btn${l.flagged?' flagged':''}" onclick="toggleFlag('${l.id}')" title="${l.flagged?'Remove hot flag':'Mark as hot'}">🔥</button>
+      </div></div>
       <div class="cb2"><div class="lbl">Pain points</div><div class="chips">${chips}</div><div class="lbl">Hook</div><div class="hk"><p>${l.hook}</p></div><div class="lbl">Recommended service</div><div class="lv">${l.service}</div></div>
       <div class="cf">
         <select onchange="upSt('${l.id}',this.value)">${['New','Contacted','Replied','Booked','Do-Not-Contact'].map(s=>`<option${s===st?' selected':''}>${s}</option>`).join('')}</select>
         <button class="be" onclick="openM('${l.id}')">Full brief ↗</button>
         <span class="bt">${l.batch?'Batch '+l.batch:''}</span>
+      </div>
+      <div style="padding:0 16px 10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span class="followup-label">Follow-up</span>
+        <input type="date" class="${fuClass}" value="${fuVal}" onchange="upFollowup('${l.id}',this.value)" title="Set a follow-up date">
+        ${overdue?'<span class="overdue-badge">Overdue</span>':''}
       </div>
     </div></div>`;
   }).join('');
@@ -256,6 +261,24 @@ async function upSt(id,status){
   sync('sync','Saving…');
   try{await dbPatch(id,l);sync('live','Live');toast('Status updated.');}
   catch{sync('err','Save failed');toast('Save failed — check connection.');}
+  render();
+}
+
+async function toggleFlag(id){
+  const l=leads.find(x=>x.id===id);if(!l)return;
+  l.flagged=!l.flagged;
+  sync('sync','Saving…');
+  try{await dbPatch(id,l);sync('live','Live');toast(l.flagged?'Marked as hot 🔥':'Flag removed.');}
+  catch{sync('err','Save failed');}
+  render();
+}
+
+async function upFollowup(id,date){
+  const l=leads.find(x=>x.id===id);if(!l)return;
+  l.followupDate=date||null;
+  sync('sync','Saving…');
+  try{await dbPatch(id,l);sync('live','Live');toast(date?'Follow-up date set.':'Follow-up date cleared.');}
+  catch{sync('err','Save failed');}
   render();
 }
 
@@ -287,6 +310,7 @@ async function saveN(id){
 document.getElementById('sq').addEventListener('input',e=>{sq=e.target.value.trim();render();});
 document.querySelectorAll('[data-f]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-f]').forEach(x=>x.classList.remove('on'));b.classList.add('on');fScore=b.dataset.f;render();}));
 document.querySelectorAll('[data-fs]').forEach(b=>b.addEventListener('click',()=>{const v=b.dataset.fs;if(fStatus===v){fStatus=null;b.classList.remove('on');}else{document.querySelectorAll('[data-fs]').forEach(x=>x.classList.remove('on'));fStatus=v;b.classList.add('on');}render();}));
+document.querySelectorAll('[data-ff]').forEach(b=>b.addEventListener('click',()=>{const v=b.dataset.ff;if(fFlag===v){fFlag=null;b.classList.remove('on');}else{document.querySelectorAll('[data-ff]').forEach(x=>x.classList.remove('on'));fFlag=v;b.classList.add('on');}render();}));
 document.getElementById('srt').addEventListener('change',e=>{sortBy=e.target.value;render();});
 document.getElementById('mcl').addEventListener('click',()=>document.getElementById('mbg').classList.remove('open'));
 document.getElementById('mbg').addEventListener('click',e=>{if(e.target===document.getElementById('mbg'))document.getElementById('mbg').classList.remove('open');});
@@ -312,6 +336,5 @@ document.getElementById('mbg').addEventListener('click',e=>{if(e.target===docume
   }
 })();
 </script>
-
-
-</body></html>
+</body>
+</html>
